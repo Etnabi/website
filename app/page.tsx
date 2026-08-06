@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { Flower, MoleculeCluster, MushroomTrio } from "./Deco";
 import RevealObserver from "./RevealObserver";
+import ZoomImage from "./ZoomImage";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -140,23 +142,15 @@ export default function Home() {
         </section>
 
         <section className="pausa reveal" id="pausa">
-          <svg className="pausa-mark" viewBox="0 0 640 240" fill="none" aria-hidden="true">
-            <path
-              d="M10 150c60-90 120 60 180-20s110-90 170-10 120 60 180-30"
-              stroke="var(--acento)"
-              strokeWidth="1.4"
-              opacity=".5"
+          <ZoomImage>
+            <Image
+              src="/investigacion-editada.png"
+              alt="Visualización de una simulación molecular computacional"
+              width={1060}
+              height={1124}
+              className="pausa-image"
             />
-            <path
-              d="M10 110c60 70 120-40 180 30s110 60 170-10 120-40 180 40"
-              stroke="var(--azul)"
-              strokeWidth="1.4"
-              opacity=".5"
-            />
-            <circle cx="190" cy="130" r="5" fill="var(--rosa)" opacity=".8" />
-            <circle cx="360" cy="100" r="4" fill="var(--morado)" opacity=".8" />
-            <circle cx="520" cy="140" r="5" fill="var(--verde)" opacity=".8" />
-          </svg>
+          </ZoomImage>
           <p>Toda investigación empieza con una buena pregunta.</p>
         </section>
 
