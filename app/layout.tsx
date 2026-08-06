@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Etna Abigail",
-  description: "Sitio personal — en construcción.",
+  description: "Ciencia con rigor, negocios con cuidado — el hub personal de Etna Abigail.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
