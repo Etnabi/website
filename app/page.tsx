@@ -120,11 +120,15 @@ export default function Home() {
           </svg>
           <div className="home-hero-inner">
             <h1>Etna Abigail</h1>
-            <p className="tagline">
-              Me interesa entender cómo funcionan las cosas. A veces esa pregunta me lleva a una
-              proteína; otras, a un negocio pequeño que apenas está empezando. El método es
-              siempre el mismo: observar, preguntar, cuidar los detalles.
+            <p className="tagline">Me interesan las preguntas que requieren paciencia.</p>
+            <p className="tagline-list">
+              Algunas terminan en una simulación molecular.
+              <br />
+              Otras, en un pequeño negocio.
+              <br />
+              Otras, simplemente en una libreta llena de notas.
             </p>
+            <p className="tagline">Este espacio reúne todas ellas.</p>
           </div>
         </header>
 
@@ -146,12 +150,12 @@ export default function Home() {
             <Image
               src="/investigacion-editada.png"
               alt="Visualización de una simulación molecular computacional"
-              width={1060}
-              height={1124}
+              width={905}
+              height={430}
               className="pausa-image"
             />
           </ZoomImage>
-          <p>Toda investigación empieza con una buena pregunta.</p>
+          <p className="pausa-caption">Toda investigación empieza con una buena pregunta.</p>
         </section>
 
         <section className="pad reveal" id="negocios">
