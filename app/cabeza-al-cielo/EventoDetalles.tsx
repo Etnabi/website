@@ -9,7 +9,7 @@ export default function EventoDetalles() {
     <div
       className="relative rounded-lg overflow-hidden"
       style={{
-        backgroundImage: "url('/evento-bg.png')",
+        backgroundImage: "url('/cabeza-al-cielo/evento-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

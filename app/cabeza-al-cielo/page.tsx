@@ -51,7 +51,7 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6 py-24 text-center">
         <div className="mb-12 flex justify-center">
           <Image
-            src="/logo.png"
+            src="/cabeza-al-cielo/logo.png"
             alt="De la Cabeza al Cielo - Logo"
             width={280}
             height={220}
@@ -102,7 +102,7 @@ export default function Home() {
             {/* Imagen */}
             <div className="flex items-center justify-center p-8">
               <img
-                src="/tv-jalisco.png"
+                src="/cabeza-al-cielo/tv-jalisco.png"
                 alt="Aparición en TV Jalisco"
                 className="w-full h-auto rounded-lg shadow-md"
               />
@@ -140,7 +140,7 @@ export default function Home() {
                 <div className="flex flex-col h-full">
                   <div className="flex-shrink-0 h-48 overflow-hidden">
                     <img
-                      src="/facebook-post.png"
+                      src="/cabeza-al-cielo/facebook-post.png"
                       alt="Publicación Facebook - Salud es un Derecho Humano"
                       className="w-full h-full object-cover"
                     />
@@ -162,7 +162,7 @@ export default function Home() {
                 <div className="flex flex-col h-full">
                   <div className="flex-shrink-0 h-48 overflow-hidden">
                     <img
-                      src="/facebook-post-2.png"
+                      src="/cabeza-al-cielo/facebook-post-2.png"
                       alt="Publicación Facebook - No Estás Sola"
                       className="w-full h-full object-cover"
                     />
@@ -184,7 +184,7 @@ export default function Home() {
                 <div className="flex flex-col h-full">
                   <div className="flex-shrink-0 h-48 overflow-hidden">
                     <img
-                      src="/facebook-post-3.png"
+                      src="/cabeza-al-cielo/facebook-post-3.png"
                       alt="Publicación Facebook - Escalón Universal"
                       className="w-full h-full object-cover"
                     />
