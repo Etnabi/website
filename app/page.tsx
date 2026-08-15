@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Flower, MoleculeCluster, MushroomTrio } from "./Deco";
 import RevealObserver from "./RevealObserver";
 import ZoomImage from "./ZoomImage";
+import InteractiveMolecule from "./InteractiveMolecule";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -146,16 +147,8 @@ export default function Home() {
         </section>
 
         <section className="pausa reveal" id="pausa">
-          <ZoomImage>
-            <Image
-              src="/investigacion-editada.png"
-              alt="Visualización de una simulación molecular computacional"
-              width={905}
-              height={430}
-              className="pausa-image"
-            />
-          </ZoomImage>
-          <p className="pausa-caption">Toda investigación empieza con una buena pregunta.</p>
+          <InteractiveMolecule />
+          <p className="pausa-caption">Acerca el cursor — toda investigación empieza con una buena pregunta.</p>
         </section>
 
         <section className="pad reveal" id="negocios">
