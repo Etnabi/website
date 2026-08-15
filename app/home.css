@@ -78,7 +78,6 @@
 .home-hero h1{
   font-family:var(--font-display,"Fraunces",Georgia,serif); font-size:clamp(42px,6vw,72px); font-weight:400; letter-spacing:-.03em; line-height:1.1;
   margin:0 0 32px; text-wrap:balance; color:var(--ink);
-  text-transform:lowercase;
 }
 
 .highlight-box{

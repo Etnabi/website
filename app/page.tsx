@@ -122,7 +122,7 @@ export default function Home() {
           </svg>
           <div className="hero-grid">
             <div className="home-hero-inner">
-              <h1>hola, soy <span className="highlight-box">Abi.</span></h1>
+              <h1>Hola, soy <span className="highlight-box">Abi.</span></h1>
               <p className="hero-lead">
                 Este sitio es una ventana a las cosas que me interesan, los proyectos en los que trabajo y algunas de las cosas que voy descubriendo por el camino.
               </p>
