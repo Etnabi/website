@@ -157,6 +157,15 @@ export default function Home() {
               </span>
             </div>
           </div>
+          <div className="metodo-image relative z-10">
+            <Image
+              src="/investigacion-editada.png"
+              alt="Simulación molecular"
+              width={200}
+              height={200}
+              className="w-full h-auto max-w-xs"
+            />
+          </div>
         </section>
 
         <section className="pad reveal relative" id="negocios">
