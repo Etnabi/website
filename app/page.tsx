@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Flower, MoleculeCluster, MushroomTrio } from "./Deco";
+import { Flower, MoleculeCluster, MushroomTrio, OrganicBlob, HandArrow, SmallHeart } from "./Deco";
 import RevealObserver from "./RevealObserver";
 import ZoomImage from "./ZoomImage";
 import ProteinChain from "./ProteinChain";
@@ -122,7 +122,7 @@ export default function Home() {
           </svg>
           <div className="hero-grid">
             <div className="home-hero-inner">
-              <h1>Hola, soy <span className="highlight-box">Abi.</span></h1>
+              <h1>hola, soy <span className="highlight-box">Abi.</span></h1>
               <p className="hero-lead">
                 Este sitio es una ventana a las cosas que me interesan, los proyectos en los que trabajo y algunas de las cosas que voy descubriendo por el camino.
               </p>
@@ -135,8 +135,10 @@ export default function Home() {
                 <a href="#contacto" className="btn ghost">Contacto</a>
               </div>
             </div>
-            <div className="hero-animation">
+            <div className="hero-animation relative">
+              <OrganicBlob className="absolute -top-12 -right-8 w-32 h-32 opacity-20" color="var(--acento)" />
               <ProteinChain />
+              <HandArrow className="absolute -bottom-6 right-8 w-8 h-8 opacity-40" direction="down-right" color="var(--teal-sat)" />
             </div>
           </div>
         </header>
@@ -182,6 +184,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <BackgroundMolecules count={2} />
           </div>
+          <OrganicBlob className="absolute top-20 -left-12 w-40 h-40" color="var(--sage)" />
           <MushroomTrio className="deco deco-campo" />
           <h2 className="relative z-10">Notas de campo</h2>
           <p className="campo-intro relative z-10">
@@ -200,8 +203,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="contact reveal" id="contacto">
-          <div className="contact-inner">
+        <section className="contact reveal relative" id="contacto">
+          <OrganicBlob className="absolute top-16 -right-20 w-48 h-48" color="var(--rosa)" />
+          <OrganicBlob className="absolute bottom-32 -left-16 w-36 h-36" color="var(--acento)" />
+          <div className="contact-inner relative z-10">
             <span className="eyebrow">Contacto</span>
             <h2 className="section-title">Hablemos.</h2>
             <p className="contact-lead">

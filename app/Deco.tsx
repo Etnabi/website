@@ -71,3 +71,34 @@ export function MushroomTrio({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function OrganicBlob({ className, color = "var(--acento)" }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 140 140" fill={color} aria-hidden="true">
+      <path d="M70 20C95 15 115 35 115 70C115 105 95 125 70 130C45 135 25 115 25 70C25 35 45 15 70 20Z" opacity=".15" />
+    </svg>
+  );
+}
+
+export function HandArrow({ className, direction = "down-right", color = "var(--teal-sat)" }: { className?: string; direction?: "down-right" | "down-left" | "up-right" | "up-left"; color?: string }) {
+  const paths: Record<string, string> = {
+    "down-right": "M10 10Q20 15 30 25L27 20",
+    "down-left": "M30 10Q20 15 10 25L13 20",
+    "up-right": "M10 30Q20 25 30 15L27 20",
+    "up-left": "M30 30Q20 25 10 15L13 20",
+  };
+
+  return (
+    <svg className={className} viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <path d={paths[direction]} stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function SmallHeart({ className, color = "var(--rosa)" }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill={color} aria-hidden="true">
+      <path d="M12 21c-4-2-8-4-8-8 0-2 1.5-3.5 3.5-3.5 1 0 2 .5 2.5 1 .5-.5 1.5-1 2.5-1 2 0 3.5 1.5 3.5 3.5 0 4-4 6-8 8z" opacity=".4" />
+    </svg>
+  );
+}
