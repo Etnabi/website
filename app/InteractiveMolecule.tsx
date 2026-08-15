@@ -2,18 +2,38 @@
 
 import { useEffect, useRef, useState } from "react";
 
-interface Particle {
+interface Atom {
   x: number;
   y: number;
   vx: number;
   vy: number;
   radius: number;
+  color: string;
+  type: number; // 0-2 para diferentes tipos de átomos
 }
+
+interface Molecule {
+  atoms: Atom[];
+  centerX: number;
+  centerY: number;
+  rotation: number;
+  rotationSpeed: number;
+}
+
+const COLORS = [
+  "#FF6B6B", // Rojo
+  "#4ECDC4", // Turquesa
+  "#FFD93D", // Amarillo
+  "#A8E6CF", // Verde menta
+  "#FF8B94", // Rosa
+  "#6C5CE7", // Púrpura
+  "#74B9FF", // Azul
+];
 
 export default function InteractiveMolecule() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const particlesRef = useRef<Particle[]>([]);
+  const moleculesRef = useRef<Molecule[]>([]);
   const animationRef = useRef<number>();
 
   useEffect(() => {
@@ -31,15 +51,43 @@ export default function InteractiveMolecule() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Initialize particles
-    const particleCount = 50;
-    particlesRef.current = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      radius: Math.random() * 2 + 2,
-    }));
+    // Create molecules (clusters)
+    const createMolecule = (x: number, y: number, atomCount: number, color: string) => {
+      const atoms: Atom[] = [];
+      const radius = atomCount * 8;
+
+      for (let i = 0; i < atomCount; i++) {
+        const angle = (i / atomCount) * Math.PI * 2;
+        const distance = Math.random() * radius + 5;
+        atoms.push({
+          x: x + Math.cos(angle) * distance,
+          y: y + Math.sin(angle) * distance,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          radius: Math.random() * 2 + 3,
+          color: color,
+          type: i % 3,
+        });
+      }
+
+      return {
+        atoms,
+        centerX: x,
+        centerY: y,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.02,
+      };
+    };
+
+    // Initialize molecules
+    moleculesRef.current = [];
+    for (let i = 0; i < 6; i++) {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const atomCount = Math.random() * 4 + 3;
+      const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      moleculesRef.current.push(createMolecule(x, y, atomCount, color));
+    }
 
     // Mouse move handler
     const handleMouseMove = (e: MouseEvent) => {
@@ -54,82 +102,119 @@ export default function InteractiveMolecule() {
 
     // Animation loop
     const animate = () => {
-      // Clear canvas
-      ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+      // Clear canvas with gradient
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, "rgba(240, 245, 250, 0.1)");
+      gradient.addColorStop(1, "rgba(220, 240, 250, 0.1)");
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const particles = particlesRef.current;
-      const repelRadius = 120;
-      const repelStrength = 3;
+      const molecules = moleculesRef.current;
+      const repelRadius = 150;
+      const repelStrength = 2;
 
-      // Update particles
-      particles.forEach((particle) => {
-        // Repel from mouse
-        const dx = particle.x - mousePos.x;
-        const dy = particle.y - mousePos.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+      // Update molecules
+      molecules.forEach((mol) => {
+        mol.rotation += mol.rotationSpeed;
 
-        if (distance < repelRadius) {
-          const angle = Math.atan2(dy, dx);
-          const force = (1 - distance / repelRadius) * repelStrength;
-          particle.vx += Math.cos(angle) * force;
-          particle.vy += Math.sin(angle) * force;
-        }
-
-        // Apply velocity
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        // Damping
-        particle.vx *= 0.95;
-        particle.vy *= 0.95;
-
-        // Bounce off walls
-        if (particle.x - particle.radius < 0 || particle.x + particle.radius > canvas.width) {
-          particle.vx *= -1;
-          particle.x = Math.max(particle.radius, Math.min(canvas.width - particle.radius, particle.x));
-        }
-        if (particle.y - particle.radius < 0 || particle.y + particle.radius > canvas.height) {
-          particle.vy *= -1;
-          particle.y = Math.max(particle.radius, Math.min(canvas.height - particle.radius, particle.y));
-        }
-
-        // Add slight gravity to keep particles from floating
-        particle.vy += 0.1;
-      });
-
-      // Draw connections
-      ctx.strokeStyle = "rgba(100, 150, 200, 0.3)";
-      ctx.lineWidth = 1;
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
+        // Update atoms
+        mol.atoms.forEach((atom) => {
+          // Repel from mouse
+          const dx = atom.x - mousePos.x;
+          const dy = atom.y - mousePos.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
-            ctx.globalAlpha = 1 - distance / 100;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-            ctx.globalAlpha = 1;
+          if (distance < repelRadius) {
+            const angle = Math.atan2(dy, dx);
+            const force = (1 - distance / repelRadius) * repelStrength;
+            atom.vx += Math.cos(angle) * force;
+            atom.vy += Math.sin(angle) * force;
+          }
+
+          // Apply velocity
+          atom.x += atom.vx;
+          atom.y += atom.vy;
+
+          // Damping
+          atom.vx *= 0.93;
+          atom.vy *= 0.93;
+
+          // Attraction to molecule center
+          const centerDx = mol.centerX - atom.x;
+          const centerDy = mol.centerY - atom.y;
+          const centerDist = Math.sqrt(centerDx * centerDx + centerDy * centerDy);
+          if (centerDist > 50) {
+            atom.vx += (centerDx / centerDist) * 0.1;
+            atom.vy += (centerDy / centerDist) * 0.1;
+          }
+
+          // Bounce off walls
+          if (atom.x - atom.radius < 0 || atom.x + atom.radius > canvas.width) {
+            atom.vx *= -0.8;
+            atom.x = Math.max(atom.radius, Math.min(canvas.width - atom.radius, atom.x));
+          }
+          if (atom.y - atom.radius < 0 || atom.y + atom.radius > canvas.height) {
+            atom.vy *= -0.8;
+            atom.y = Math.max(atom.radius, Math.min(canvas.height - atom.radius, atom.y));
+          }
+
+          // Add slight gravity
+          atom.vy += 0.05;
+        });
+
+        // Update center
+        let sumX = 0,
+          sumY = 0;
+        mol.atoms.forEach((atom) => {
+          sumX += atom.x;
+          sumY += atom.y;
+        });
+        mol.centerX += (sumX / mol.atoms.length - mol.centerX) * 0.02;
+        mol.centerY += (sumY / mol.atoms.length - mol.centerY) * 0.02;
+      });
+
+      // Draw molecules
+      molecules.forEach((mol) => {
+        // Draw bonds between atoms
+        for (let i = 0; i < mol.atoms.length; i++) {
+          for (let j = i + 1; j < mol.atoms.length; j++) {
+            const dx = mol.atoms[i].x - mol.atoms[j].x;
+            const dy = mol.atoms[i].y - mol.atoms[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 40) {
+              ctx.strokeStyle = `rgba(100, 150, 200, ${0.4 * (1 - distance / 40)})`;
+              ctx.lineWidth = 2;
+              ctx.beginPath();
+              ctx.moveTo(mol.atoms[i].x, mol.atoms[i].y);
+              ctx.lineTo(mol.atoms[j].x, mol.atoms[j].y);
+              ctx.stroke();
+            }
           }
         }
-      }
 
-      // Draw particles
-      particles.forEach((particle) => {
-        ctx.fillStyle = "rgba(150, 180, 220, 0.8)";
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fill();
+        // Draw atoms
+        mol.atoms.forEach((atom) => {
+          // Glow
+          ctx.fillStyle = atom.color;
+          ctx.globalAlpha = 0.2;
+          ctx.beginPath();
+          ctx.arc(atom.x, atom.y, atom.radius * 2, 0, Math.PI * 2);
+          ctx.fill();
 
-        // Glow effect
-        ctx.strokeStyle = "rgba(100, 150, 200, 0.5)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
+          // Main circle
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = atom.color;
+          ctx.beginPath();
+          ctx.arc(atom.x, atom.y, atom.radius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Shine
+          ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+          ctx.beginPath();
+          ctx.arc(atom.x - atom.radius * 0.3, atom.y - atom.radius * 0.3, atom.radius * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+        });
       });
 
       animationRef.current = requestAnimationFrame(animate);
@@ -147,7 +232,7 @@ export default function InteractiveMolecule() {
   return (
     <canvas
       ref={canvasRef}
-      className="w-full bg-gradient-to-b from-purple-50 to-blue-50 rounded-lg"
+      className="w-full bg-gradient-to-b from-slate-50 to-slate-100 rounded-lg"
       style={{ height: "400px" }}
     />
   );
