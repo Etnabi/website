@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface Atom {
   x: number;
@@ -9,7 +9,6 @@ interface Atom {
   vy: number;
   radius: number;
   color: string;
-  type: number; // 0-2 para diferentes tipos de átomos
 }
 
 interface Molecule {
@@ -21,18 +20,12 @@ interface Molecule {
 }
 
 const COLORS = [
-  "#FF6B6B", // Rojo
-  "#4ECDC4", // Turquesa
-  "#FFD93D", // Amarillo
-  "#A8E6CF", // Verde menta
-  "#FF8B94", // Rosa
-  "#6C5CE7", // Púrpura
-  "#74B9FF", // Azul
+  "#FF6B6B", "#4ECDC4", "#FFD93D", "#A8E6CF",
+  "#FF8B94", "#6C5CE7", "#74B9FF",
 ];
 
-export default function InteractiveMolecule() {
+export default function BackgroundMolecules({ count = 2 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const moleculesRef = useRef<Molecule[]>([]);
   const animationRef = useRef<number>();
 
@@ -43,7 +36,6 @@ export default function InteractiveMolecule() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Resize canvas
     const resizeCanvas = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
@@ -51,22 +43,21 @@ export default function InteractiveMolecule() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Create molecules (clusters)
+    // Create molecules
     const createMolecule = (x: number, y: number, atomCount: number, color: string) => {
       const atoms: Atom[] = [];
-      const radius = atomCount * 8;
+      const radius = atomCount * 6;
 
       for (let i = 0; i < atomCount; i++) {
         const angle = (i / atomCount) * Math.PI * 2;
-        const distance = Math.random() * radius + 5;
+        const distance = Math.random() * radius + 4;
         atoms.push({
           x: x + Math.cos(angle) * distance,
           y: y + Math.sin(angle) * distance,
-          vx: (Math.random() - 0.5) * 2,
-          vy: (Math.random() - 0.5) * 2,
-          radius: Math.random() * 2 + 3,
+          vx: (Math.random() - 0.5) * 1,
+          vy: (Math.random() - 0.5) * 1,
+          radius: Math.random() * 1.5 + 2,
           color: color,
-          type: i % 3,
         });
       }
 
@@ -75,80 +66,45 @@ export default function InteractiveMolecule() {
         centerX: x,
         centerY: y,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        rotationSpeed: (Math.random() - 0.5) * 0.01,
       };
     };
 
-    // Initialize molecules
     moleculesRef.current = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < count; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
-      const atomCount = Math.random() * 4 + 3;
+      const atomCount = Math.random() * 3 + 2;
       const color = COLORS[Math.floor(Math.random() * COLORS.length)];
       moleculesRef.current.push(createMolecule(x, y, atomCount, color));
     }
 
-    // Mouse move handler
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    };
-
-    canvas.addEventListener("mousemove", handleMouseMove);
-
     // Animation loop
     const animate = () => {
-      // Clear canvas with gradient
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "rgba(240, 245, 250, 0.1)");
-      gradient.addColorStop(1, "rgba(220, 240, 250, 0.1)");
-      ctx.fillStyle = gradient;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const molecules = moleculesRef.current;
-      const repelRadius = 250;
-      const repelStrength = 4;
 
-      // Update molecules
       molecules.forEach((mol) => {
         mol.rotation += mol.rotationSpeed;
 
-        // Update atoms
         mol.atoms.forEach((atom) => {
-          // Repel from mouse
-          const dx = atom.x - mousePos.x;
-          const dy = atom.y - mousePos.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < repelRadius) {
-            const angle = Math.atan2(dy, dx);
-            const force = (1 - distance / repelRadius) * repelStrength;
-            atom.vx += Math.cos(angle) * force;
-            atom.vy += Math.sin(angle) * force;
-          }
-
-          // Apply velocity
           atom.x += atom.vx;
           atom.y += atom.vy;
 
-          // Damping
-          atom.vx *= 0.93;
-          atom.vy *= 0.93;
+          atom.vx *= 0.97;
+          atom.vy *= 0.97;
 
-          // Attraction to molecule center
+          // Attraction to center
           const centerDx = mol.centerX - atom.x;
           const centerDy = mol.centerY - atom.y;
           const centerDist = Math.sqrt(centerDx * centerDx + centerDy * centerDy);
-          if (centerDist > 50) {
-            atom.vx += (centerDx / centerDist) * 0.1;
-            atom.vy += (centerDy / centerDist) * 0.1;
+          if (centerDist > 30) {
+            atom.vx += (centerDx / centerDist) * 0.08;
+            atom.vy += (centerDy / centerDist) * 0.08;
           }
 
-          // Bounce off walls
           if (atom.x - atom.radius < 0 || atom.x + atom.radius > canvas.width) {
             atom.vx *= -0.8;
             atom.x = Math.max(atom.radius, Math.min(canvas.width - atom.radius, atom.x));
@@ -157,12 +113,9 @@ export default function InteractiveMolecule() {
             atom.vy *= -0.8;
             atom.y = Math.max(atom.radius, Math.min(canvas.height - atom.radius, atom.y));
           }
-
         });
 
-        // Update center
-        let sumX = 0,
-          sumY = 0;
+        let sumX = 0, sumY = 0;
         mol.atoms.forEach((atom) => {
           sumX += atom.x;
           sumY += atom.y;
@@ -173,16 +126,15 @@ export default function InteractiveMolecule() {
 
       // Draw molecules
       molecules.forEach((mol) => {
-        // Draw bonds between atoms
         for (let i = 0; i < mol.atoms.length; i++) {
           for (let j = i + 1; j < mol.atoms.length; j++) {
             const dx = mol.atoms[i].x - mol.atoms[j].x;
             const dy = mol.atoms[i].y - mol.atoms[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 40) {
-              ctx.strokeStyle = `rgba(100, 150, 200, ${0.4 * (1 - distance / 40)})`;
-              ctx.lineWidth = 2;
+            if (distance < 30) {
+              ctx.strokeStyle = `rgba(100, 150, 200, ${0.3 * (1 - distance / 30)})`;
+              ctx.lineWidth = 1.5;
               ctx.beginPath();
               ctx.moveTo(mol.atoms[i].x, mol.atoms[i].y);
               ctx.lineTo(mol.atoms[j].x, mol.atoms[j].y);
@@ -191,26 +143,22 @@ export default function InteractiveMolecule() {
           }
         }
 
-        // Draw atoms
         mol.atoms.forEach((atom) => {
-          // Glow
           ctx.fillStyle = atom.color;
-          ctx.globalAlpha = 0.2;
+          ctx.globalAlpha = 0.15;
           ctx.beginPath();
-          ctx.arc(atom.x, atom.y, atom.radius * 2, 0, Math.PI * 2);
+          ctx.arc(atom.x, atom.y, atom.radius * 1.8, 0, Math.PI * 2);
           ctx.fill();
 
-          // Main circle
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = 0.8;
           ctx.fillStyle = atom.color;
           ctx.beginPath();
           ctx.arc(atom.x, atom.y, atom.radius, 0, Math.PI * 2);
           ctx.fill();
 
-          // Shine
-          ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+          ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
           ctx.beginPath();
-          ctx.arc(atom.x - atom.radius * 0.3, atom.y - atom.radius * 0.3, atom.radius * 0.3, 0, Math.PI * 2);
+          ctx.arc(atom.x - atom.radius * 0.25, atom.y - atom.radius * 0.25, atom.radius * 0.25, 0, Math.PI * 2);
           ctx.fill();
         });
       });
@@ -222,16 +170,15 @@ export default function InteractiveMolecule() {
 
     return () => {
       cancelAnimationFrame(animationRef.current || 0);
-      canvas.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
+  }, [count]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="w-full bg-gradient-to-b from-slate-50 to-slate-100 rounded-lg"
-      style={{ height: "400px" }}
+      className="absolute inset-0 pointer-events-none"
+      style={{ height: "100%" }}
     />
   );
 }

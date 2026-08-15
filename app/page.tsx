@@ -2,7 +2,8 @@ import Image from "next/image";
 import { Flower, MoleculeCluster, MushroomTrio } from "./Deco";
 import RevealObserver from "./RevealObserver";
 import ZoomImage from "./ZoomImage";
-import InteractiveMolecule from "./InteractiveMolecule";
+import ProteinChain from "./ProteinChain";
+import BackgroundMolecules from "./BackgroundMolecules";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -119,23 +120,34 @@ export default function Home() {
             <circle cx="74" cy="18" r="3.5" />
             <circle cx="50" cy="56" r="3.5" />
           </svg>
-          <div className="home-hero-inner">
-            <h1>Etna Abigail</h1>
-            <p className="tagline">Me interesan las preguntas que requieren paciencia.</p>
-            <p className="tagline-list">
-              Algunas terminan en una simulación molecular.
-              <br />
-              Otras, en un pequeño negocio.
-              <br />
-              Otras, simplemente en una libreta llena de notas.
-            </p>
-            <p className="tagline">Este espacio reúne todas ellas.</p>
+          <div className="hero-grid">
+            <div className="home-hero-inner">
+              <span className="eyebrow">Ciencia · Negocios · Exploraciones</span>
+              <h1>Encuentro preguntas, <br />construyo <span className="highlight-box">respuestas.</span></h1>
+              <p className="hero-lead">
+                Trabajo en la intersección de la simulación molecular, el análisis de datos y el diseño de experiencias. Me interesa todo lo que requiere paciencia: investigación rigurosa, negocios cuidadosos, notas llenas de curiosidad.
+              </p>
+              <div className="hero-meta">
+                <span><i className="dot" style={{background: "var(--teal-sat)"}}></i> León, Guanajuato · MX</span>
+                <span><i className="dot" style={{background: "var(--acento)"}}></i> M.Sc. Ciencias Aplicadas (en curso)</span>
+              </div>
+              <div className="cta-row">
+                <a href="#campo" className="btn primary">Ver trabajo</a>
+                <a href="#contacto" className="btn ghost">Contacto</a>
+              </div>
+            </div>
+            <div className="hero-animation">
+              <ProteinChain />
+            </div>
           </div>
         </header>
 
-        <section className="pad reveal" id="metodo">
+        <section className="pad reveal relative" id="metodo">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <BackgroundMolecules count={1} />
+          </div>
           <Flower className="deco deco-metodo" stroke="var(--azul)" />
-          <div className="perfil-meta standalone">
+          <div className="perfil-meta standalone relative z-10">
             <span className="mono-label">Actualmente</span>
             <div className="item">
               <span className="v-title">Investigación</span>
@@ -146,15 +158,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="pausa reveal" id="pausa">
-          <InteractiveMolecule />
-          <p className="pausa-caption">Acerca el cursor — toda investigación empieza con una buena pregunta.</p>
-        </section>
-
-        <section className="pad reveal" id="negocios">
+        <section className="pad reveal relative" id="negocios">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <BackgroundMolecules count={2} />
+          </div>
           <MoleculeCluster className="deco deco-negocios" stroke="var(--rosa-ecotono)" />
-          <h2>Lo que estoy construyendo</h2>
-          <div className="negocios-grid">
+          <h2 className="relative z-10">Lo que estoy construyendo</h2>
+          <div className="negocios-grid relative z-10">
             {NEGOCIOS.map((n) => (
               <a className="negocio-card" href={n.href} key={n.name}>
                 <span className="swatch" style={{ background: n.swatch }}></span>
@@ -169,15 +179,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="pad reveal" id="campo">
+        <section className="pad reveal relative" id="campo">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <BackgroundMolecules count={2} />
+          </div>
           <MushroomTrio className="deco deco-campo" />
-          <h2>Notas de campo</h2>
-          <p className="campo-intro">
+          <h2 className="relative z-10">Notas de campo</h2>
+          <p className="campo-intro relative z-10">
             No todo lo que me interesa termina en una publicación científica. Algunas ideas nacen
             observando una flor, diseñando un sitio web, conversando sobre accesibilidad o
             intentando construir un pequeño negocio. Este espacio reúne esas exploraciones.
           </p>
-          <div className="curiosidad-grid">
+          <div className="curiosidad-grid relative z-10">
             {CAMPO.map((i) => (
               <div className="curiosidad-card" key={i.name}>
                 <CampoIcon color={i.color}>{i.icon}</CampoIcon>
@@ -185,6 +198,29 @@ export default function Home() {
                 <p>{i.phrase}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="contact reveal" id="contacto">
+          <div className="contact-inner">
+            <span className="eyebrow">Contacto</span>
+            <h2 className="section-title">Hablemos.</h2>
+            <p className="contact-lead">
+              ¿Un proyecto de simulación, análisis de datos o una colaboración de investigación?
+              <br />
+              Escríbeme por cualquiera de estos canales.
+            </p>
+            <div className="contact-links">
+              <a href="mailto:etna.aby@gmail.com" className="clink">
+                📧 Correo
+              </a>
+              <a href="https://linkedin.com/in/etnabigail" target="_blank" rel="noopener" className="clink">
+                💼 LinkedIn
+              </a>
+              <a href="https://github.com/etnabi" target="_blank" rel="noopener" className="clink">
+                🔗 GitHub
+              </a>
+            </div>
           </div>
         </section>
 
