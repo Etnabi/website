@@ -102,8 +102,8 @@
   padding:13px 22px; border-radius:2px; border:1px solid var(--linea-fuerte,rgba(29,27,34,.2));
   transition:all .2s; cursor:pointer; text-decoration:none;
 }
-.btn.primary{ background:var(--teal-sat); color:#fff; border-color:var(--teal-sat); font-weight:600; }
-.btn.primary:hover{ background:#4CB0A1; transform:translateY(-1px); }
+.btn.primary{ background:#74B9FF; color:#fff; border-color:#74B9FF; font-weight:600; }
+.btn.primary:hover{ background:#5AA3E8; transform:translateY(-1px); }
 .btn.ghost{ background:transparent; color:var(--texto,var(--ink)); border:1px solid var(--linea); }
 .btn.ghost:hover{ border-color:var(--teal-sat); color:var(--teal-sat); }
 .btn svg{ width:15px; height:15px; }

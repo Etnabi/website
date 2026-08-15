@@ -127,7 +127,7 @@ export default function Home() {
                 Este sitio es una ventana a las cosas que me interesan, los proyectos en los que trabajo y algunas de las cosas que voy descubriendo por el camino.
               </p>
               <div className="hero-meta">
-                <span><i className="dot" style={{background: "var(--teal-sat)"}}></i> León, Guanajuato · MX</span>
+                <span><i className="dot" style={{background: "var(--teal-sat)"}}></i> MX</span>
                 <span><i className="dot" style={{background: "var(--acento)"}}></i> M.Sc. Ciencias Aplicadas</span>
               </div>
               <div className="cta-row">
