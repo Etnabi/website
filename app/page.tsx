@@ -12,13 +12,6 @@ const NEGOCIOS = [
       "No es solo una agencia de viajes. Es un ejercicio de diseño de experiencias con la misma atención al detalle que requiere una investigación.",
     swatch: "var(--rosa-ecotono)",
   },
-  {
-    href: "https://cabeza-al-cielo.etnabi.com",
-    name: "De la Cabeza al Cielo",
-    blurb:
-      "Fundación comprometida con el acceso equitativo a tratamientos innovadores y calidad de vida para personas con acondroplasia.",
-    swatch: "#9C6B97",
-  },
 ];
 
 const CAMPO = [
