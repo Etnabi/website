@@ -161,9 +161,9 @@ export default function Home() {
             <Image
               src="/investigacion-editada.png"
               alt="Simulación molecular"
-              width={200}
-              height={200}
-              className="w-full h-auto max-w-xs"
+              width={300}
+              height={400}
+              className="w-full h-full object-cover"
             />
           </div>
         </section>
