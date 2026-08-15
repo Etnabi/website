@@ -122,14 +122,13 @@ export default function Home() {
           </svg>
           <div className="hero-grid">
             <div className="home-hero-inner">
-              <span className="eyebrow">Ciencia · Negocios · Exploraciones</span>
-              <h1>Encuentro preguntas, <br />construyo <span className="highlight-box">respuestas.</span></h1>
+              <h1>Hola, soy <span className="highlight-box">Abi.</span></h1>
               <p className="hero-lead">
-                Trabajo en la intersección de la simulación molecular, el análisis de datos y el diseño de experiencias. Me interesa todo lo que requiere paciencia: investigación rigurosa, negocios cuidadosos, notas llenas de curiosidad.
+                Este sitio es una ventana a las cosas que me interesan, los proyectos en los que trabajo y algunas de las cosas que voy descubriendo por el camino.
               </p>
               <div className="hero-meta">
                 <span><i className="dot" style={{background: "var(--teal-sat)"}}></i> León, Guanajuato · MX</span>
-                <span><i className="dot" style={{background: "var(--acento)"}}></i> M.Sc. Ciencias Aplicadas (en curso)</span>
+                <span><i className="dot" style={{background: "var(--acento)"}}></i> M.Sc. Ciencias Aplicadas</span>
               </div>
               <div className="cta-row">
                 <a href="#campo" className="btn primary">Ver trabajo</a>
@@ -212,13 +211,13 @@ export default function Home() {
             </p>
             <div className="contact-links">
               <a href="mailto:etna.aby@gmail.com" className="clink">
-                📧 Correo
+                <span className="clink-icon">✉</span> Correo
               </a>
-              <a href="https://linkedin.com/in/etnabigail" target="_blank" rel="noopener" className="clink">
-                💼 LinkedIn
+              <a href="https://www.linkedin.com/in/etna-lopez-garcia" target="_blank" rel="noopener" className="clink">
+                <span className="clink-icon">in</span> LinkedIn
               </a>
               <a href="https://github.com/etnabi" target="_blank" rel="noopener" className="clink">
-                🔗 GitHub
+                <span className="clink-icon">⚙</span> GitHub
               </a>
             </div>
           </div>
