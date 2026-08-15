@@ -111,10 +111,6 @@ export default function ProteinChain() {
     function initChains() {
       chains = [
         buildChain(26, 1, 0.5, 0.5, 0),
-        buildChain(12, 0.35, 0.15, 0.2, 0.5),
-        buildChain(14, 0.3, 0.85, 0.25, 1),
-        buildChain(10, 0.25, 0.3, 0.8, 1.5),
-        buildChain(11, 0.28, 0.75, 0.75, 2),
       ];
     }
 
