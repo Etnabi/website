@@ -159,7 +159,11 @@
 }
 #metodo{
   --azul:#3E8B93; --verde:#BBDFC9; --texto:#1F5158;
-  background:linear-gradient(135deg, rgba(187,223,201,0.15) 0%, rgba(46,124,133,0.08) 50%, rgba(187,223,201,0.12) 100%);
+  background-color:#BBDFC9;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='5' stitchTiles='stitch' seed='3' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='2' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='300' height='300' fill='%23BBDFC9' opacity='1'/%3E%3Crect width='300' height='300' fill='%23C5E2D0' opacity='0.15' filter='url(%23paper)'/%3E%3Crect width='300' height='300' fill='%23B0D9C4' opacity='0.08' filter='url(%23paper)'/%3E%3C/svg%3E");
+  background-size:300px 300px;
+  background-attachment:fixed;
 }
 #metodo .v-title{ color:var(--texto); }
 #negocios{ --texto:#8A123F; background:rgba(232,131,150,.08); }
