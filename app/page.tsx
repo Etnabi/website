@@ -158,12 +158,12 @@ export default function Home() {
             </div>
           </div>
           <div className="metodo-image relative z-10">
-            <Image
-              src="/investigacion-editada.png"
-              alt="Simulación molecular"
-              width={300}
-              height={400}
-              className="w-full h-full object-cover"
+            <video
+              src="/investigacion.mp4"
+              autoPlay
+              muted
+              loop
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </section>

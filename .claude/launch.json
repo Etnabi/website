@@ -5,8 +5,7 @@
       "name": "website",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000,
-      "cwd": "."
+      "port": 3000
     }
   ]
 }
