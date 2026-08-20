@@ -146,26 +146,26 @@ export default function ProteinChain() {
       }
 
       // contactos débiles
-      ctx.lineWidth = 1 * scale;
+      ctx!.lineWidth = 1 * scale;
       for (let i = 0; i < N; i++) {
         for (let j = i + 2; j < N; j++) {
           const dx = beads[i].x - beads[j].x,
             dy = beads[i].y - beads[j].y;
           const d = Math.hypot(dx, dy);
           if (d < 52 * scale) {
-            ctx.strokeStyle = `rgba(80,86,98,${0.16 * (1 - d / (52 * scale))})`;
-            ctx.beginPath();
-            ctx.moveTo(beads[i].x, beads[i].y);
-            ctx.lineTo(beads[j].x, beads[j].y);
-            ctx.stroke();
+            ctx!.strokeStyle = `rgba(80,86,98,${0.16 * (1 - d / (52 * scale))})`;
+            ctx!.beginPath();
+            ctx!.moveTo(beads[i].x, beads[i].y);
+            ctx!.lineTo(beads[j].x, beads[j].y);
+            ctx!.stroke();
           }
         }
       }
 
       // enlaces backbone
-      ctx.lineWidth = 2 * scale;
+      ctx!.lineWidth = 2 * scale;
       for (let i = 0; i < N - 1; i++) {
-        const grad = ctx.createLinearGradient(
+        const grad = ctx!.createLinearGradient(
           beads[i].x,
           beads[i].y,
           beads[i + 1].x,
@@ -173,35 +173,35 @@ export default function ProteinChain() {
         );
         grad.addColorStop(0, beadColor(i / (N - 1)));
         grad.addColorStop(1, beadColor((i + 1) / (N - 1)));
-        ctx.strokeStyle = grad;
-        ctx.globalAlpha = 0.55;
-        ctx.beginPath();
-        ctx.moveTo(beads[i].x, beads[i].y);
-        ctx.lineTo(beads[i + 1].x, beads[i + 1].y);
-        ctx.stroke();
+        ctx!.strokeStyle = grad;
+        ctx!.globalAlpha = 0.55;
+        ctx!.beginPath();
+        ctx!.moveTo(beads[i].x, beads[i].y);
+        ctx!.lineTo(beads[i + 1].x, beads[i + 1].y);
+        ctx!.stroke();
       }
-      ctx.globalAlpha = 1;
+      ctx!.globalAlpha = 1;
 
       // beads
       for (let i = 0; i < N; i++) {
         const b = beads[i];
         const col = beadColor(i / (N - 1));
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = col;
-        ctx.shadowColor = col;
-        ctx.shadowBlur = 7 * scale;
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx!.beginPath();
+        ctx!.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx!.fillStyle = col;
+        ctx!.shadowColor = col;
+        ctx!.shadowBlur = 7 * scale;
+        ctx!.fill();
+        ctx!.shadowBlur = 0;
 
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = "rgba(45,50,58,0.10)";
-        ctx.stroke();
+        ctx!.lineWidth = 1;
+        ctx!.strokeStyle = "rgba(45,50,58,0.10)";
+        ctx!.stroke();
 
-        ctx.beginPath();
-        ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.3, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.45)";
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.3, 0, Math.PI * 2);
+        ctx!.fillStyle = "rgba(255,255,255,0.45)";
+        ctx!.fill();
       }
     }
 
