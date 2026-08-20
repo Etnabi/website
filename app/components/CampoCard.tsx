@@ -62,8 +62,8 @@ export function CampoCard() {
 
           {/* Content */}
           <div className="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
-            <h3 className="text-sm font-bold text-white mb-2">{area.name}</h3>
-            <p className="text-xs text-white opacity-90">{area.description}</p>
+            <h3 className="text-base font-bold mb-2" style={{ color: 'var(--morado)' }}>{area.name}</h3>
+            <p className="text-sm" style={{ color: 'var(--morado)' }}>{area.description}</p>
           </div>
         </div>
       ))}

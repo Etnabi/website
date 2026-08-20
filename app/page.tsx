@@ -165,7 +165,7 @@ export default function Home() {
           </div>
           <OrganicBlob className="absolute top-20 -left-12 w-40 h-40" color="var(--sage)" />
           <MushroomTrio className="deco deco-campo" />
-          <h2 className="relative z-10">Notas de campo</h2>
+          <h2 className="relative z-10">Exploraciones y curiosidades</h2>
           <p className="campo-intro relative z-10">
             No todo lo que me interesa termina en una publicación científica. Algunas ideas nacen
             observando una flor, diseñando un sitio web, conversando sobre accesibilidad o
