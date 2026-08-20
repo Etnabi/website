@@ -5,6 +5,7 @@ import ZoomImage from "./ZoomImage";
 import ProteinChain from "./ProteinChain";
 import BackgroundMolecules from "./BackgroundMolecules";
 import { EcotonoCard } from "./components/EcotonoCard";
+import { InvestigacionCard } from "./components/InvestigacionCard";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -14,6 +15,14 @@ const NEGOCIOS = [
     blurb:
       "No es solo un viaje, es donde se encuentran los mundos.",
     swatch: "var(--rosa-ecotono)",
+  },
+  {
+    href: "#investigacion",
+    name: "Investigación",
+    blurb:
+      "Simulación molecular computacional. Explorando cómo modelar sistemas complejos.",
+    swatch: "var(--verde)",
+    isInvestigacion: true,
   },
 ];
 
@@ -144,49 +153,28 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="pad reveal relative" id="metodo">
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <BackgroundMolecules count={1} />
-          </div>
-          <Flower className="deco deco-metodo" stroke="var(--azul)" />
-          <div className="perfil-meta standalone relative z-10">
-            <span className="mono-label">Actualmente</span>
-            <div className="item">
-              <span className="v-title">Investigación</span>
-              <span className="v">
-                Simulación molecular computacional. Explorando cómo modelar sistemas complejos.
-              </span>
-            </div>
-          </div>
-          <div className="metodo-image relative z-10">
-            <video
-              src="/investigacion.mp4"
-              autoPlay
-              muted
-              loop
-              className="w-full h-full object-cover object-center"
-            />
-          </div>
-        </section>
-
-        <section className="pad reveal relative" id="negocios">
+<section className="pad reveal relative" id="negocios">
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <BackgroundMolecules count={2} />
           </div>
           <MoleculeCluster className="deco deco-negocios" stroke="var(--rosa-ecotono)" />
           <h2 className="relative z-10">Lo que estoy construyendo</h2>
           <div className="negocios-grid relative z-10">
-            {NEGOCIOS.map((n) =>
-              n.name === "Ecotono Travel Co." ? (
-                <EcotonoCard key={n.name} />
-              ) : (
-                <a className="negocio-card" href={n.href} key={n.name}>
-                  <span className="swatch" style={{ background: n.swatch }}></span>
-                  <h3>{n.name}</h3>
-                  <p>{n.blurb}</p>
-                </a>
-              )
-            )}
+            {NEGOCIOS.map((n) => {
+              if (n.name === "Ecotono Travel Co.") {
+                return <EcotonoCard key={n.name} />;
+              } else if (n.isInvestigacion) {
+                return <InvestigacionCard key={n.name} />;
+              } else {
+                return (
+                  <a className="negocio-card" href={n.href} key={n.name}>
+                    <span className="swatch" style={{ background: n.swatch }}></span>
+                    <h3>{n.name}</h3>
+                    <p>{n.blurb}</p>
+                  </a>
+                );
+              }
+            })}
             <div className="negocio-card ghost">
               <h3>Próximamente</h3>
               <p>El siguiente proyecto va aquí, cuando esté listo.</p>
