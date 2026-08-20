@@ -178,9 +178,7 @@ export default function Home() {
             <span className="eyebrow">Contacto</span>
             <h2 className="section-title">Hablemos.</h2>
             <p className="contact-lead">
-              ¿Un proyecto de simulación, análisis de datos o una colaboración de investigación?
-              <br />
-              Escríbeme por cualquiera de estos canales.
+              Me encantaría conocer tu proyecto. Cuéntame qué estás haciendo.
             </p>
             <div className="contact-links">
               <a href="mailto:etna.aby@gmail.com" className="clink" title="Correo">
