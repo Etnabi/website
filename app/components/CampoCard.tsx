@@ -26,7 +26,7 @@ const CAMPO_AREAS = [
 
 export function CampoCard() {
   return (
-    <div className="flex flex-wrap justify-center gap-8">
+    <div className="flex flex-wrap justify-center gap-16">
       {CAMPO_AREAS.map((area) => (
         <div
           key={area.name}
