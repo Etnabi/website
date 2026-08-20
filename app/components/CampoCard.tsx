@@ -30,7 +30,7 @@ export function CampoCard() {
       {CAMPO_AREAS.map((area) => (
         <div
           key={area.name}
-          className="group relative overflow-hidden rounded-full w-48 h-48"
+          className="group relative overflow-hidden rounded-full w-64 h-64"
           style={{
             backgroundColor: 'rgba(187, 223, 201, 0.15)',
             backdropFilter: 'blur(12px)',
