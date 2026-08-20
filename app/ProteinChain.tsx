@@ -251,8 +251,8 @@ export default function ProteinChain() {
   return (
     <canvas
       ref={canvasRef}
-      className="w-full bg-gradient-to-b from-slate-50 to-slate-100 rounded-lg"
-      style={{ height: "280px" }}
+      className="w-full rounded-lg"
+      style={{ height: "280px", backgroundColor: "#F9F6F2" }}
       aria-hidden="true"
     />
   );
