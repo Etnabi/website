@@ -173,13 +173,16 @@ export default function Home() {
 
         <section className="contact reveal relative" id="contacto">
           <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" viewBox="0 0 1200 600" preserveAspectRatio="none">
-            <g opacity="0.12">
-              <ellipse cx="120" cy="100" rx="65" ry="50" fill="#42625F" opacity="0.08" transform="rotate(-25 120 100)"/>
-              <ellipse cx="1080" cy="140" rx="55" ry="45" fill="#42625F" opacity="0.07" transform="rotate(35 1080 140)"/>
-              <ellipse cx="200" cy="480" rx="90" ry="70" fill="#42625F" opacity="0.06" transform="rotate(-40 200 480)"/>
-              <ellipse cx="1050" cy="520" rx="75" ry="60" fill="#42625F" opacity="0.07" transform="rotate(20 1050 520)"/>
-              <circle cx="300" cy="120" r="12" fill="#42625F" opacity="0.05"/>
-              <circle cx="1100" cy="420" r="10" fill="#42625F" opacity="0.06"/>
+            <defs>
+              <filter id="soft-blur">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+              </filter>
+            </defs>
+            <g opacity="0.3">
+              <ellipse cx="100" cy="80" rx="100" ry="80" fill="#42625F" opacity="0.15" transform="rotate(-35 100 80)" filter="url(#soft-blur)"/>
+              <ellipse cx="1100" cy="120" rx="90" ry="70" fill="#42625F" opacity="0.12" transform="rotate(45 1100 120)" filter="url(#soft-blur)"/>
+              <circle cx="150" cy="520" r="60" fill="#42625F" opacity="0.1" filter="url(#soft-blur)"/>
+              <ellipse cx="1050" cy="540" rx="110" ry="85" fill="#42625F" opacity="0.13" transform="rotate(30 1050 540)" filter="url(#soft-blur)"/>
             </g>
           </svg>
           <div className="contact-inner relative z-10">
