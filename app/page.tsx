@@ -6,6 +6,7 @@ import ProteinChain from "./ProteinChain";
 import BackgroundMolecules from "./BackgroundMolecules";
 import { EcotonoCard } from "./components/EcotonoCard";
 import { InvestigacionCard } from "./components/InvestigacionCard";
+import { CampoCard } from "./components/CampoCard";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -170,14 +171,8 @@ export default function Home() {
             observando una flor, diseñando un sitio web, conversando sobre accesibilidad o
             intentando construir un pequeño negocio. Este espacio reúne esas exploraciones.
           </p>
-          <div className="curiosidad-grid relative z-10">
-            {CAMPO.map((i) => (
-              <div className="curiosidad-card" key={i.name}>
-                <CampoIcon color={i.color}>{i.icon}</CampoIcon>
-                <h3>{i.name}</h3>
-                <p>{i.phrase}</p>
-              </div>
-            ))}
+          <div className="relative z-10">
+            <CampoCard />
           </div>
         </section>
 
