@@ -173,13 +173,13 @@ export default function Home() {
 
         <section className="contact reveal relative" id="contacto">
           <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" viewBox="0 0 1200 600" preserveAspectRatio="none">
-            <g opacity="0.15">
-              <path d="M 100 80 Q 80 120, 120 150 Q 140 160, 130 190" stroke="#42625F" strokeWidth="2" fill="none" strokeLinecap="round"/>
-              <circle cx="95" cy="75" r="3" fill="#42625F"/>
-              <circle cx="142" cy="195" r="2" fill="#42625F"/>
-              <path d="M 1100 120 L 1130 150 Q 1140 165, 1120 180" stroke="#42625F" strokeWidth="2" fill="none" strokeLinecap="round"/>
-              <ellipse cx="1050" cy="500" rx="80" ry="60" fill="#42625F" opacity="0.08"/>
-              <ellipse cx="150" cy="520" rx="60" ry="50" fill="#42625F" opacity="0.06"/>
+            <g opacity="0.12">
+              <ellipse cx="120" cy="100" rx="65" ry="50" fill="#42625F" opacity="0.08" transform="rotate(-25 120 100)"/>
+              <ellipse cx="1080" cy="140" rx="55" ry="45" fill="#42625F" opacity="0.07" transform="rotate(35 1080 140)"/>
+              <ellipse cx="200" cy="480" rx="90" ry="70" fill="#42625F" opacity="0.06" transform="rotate(-40 200 480)"/>
+              <ellipse cx="1050" cy="520" rx="75" ry="60" fill="#42625F" opacity="0.07" transform="rotate(20 1050 520)"/>
+              <circle cx="300" cy="120" r="12" fill="#42625F" opacity="0.05"/>
+              <circle cx="1100" cy="420" r="10" fill="#42625F" opacity="0.06"/>
             </g>
           </svg>
           <div className="contact-inner relative z-10">
