@@ -28,21 +28,8 @@ const NEGOCIOS = [
 
 const CAMPO = [
   {
-    name: "Sistemas complejos",
-    phrase: "Cómo unas pocas reglas simples pueden generar algo que no se puede predecir a simple vista.",
-    color: "var(--azul)",
-    icon: (
-      <>
-        <circle cx="6" cy="7" r="2.4" />
-        <circle cx="18" cy="7" r="2.4" />
-        <circle cx="12" cy="18" r="2.4" />
-        <path d="M8 8.5 11 16M16 8.5 13 16M8.3 7h7.4" />
-      </>
-    ),
-  },
-  {
-    name: "Botánica y naturaleza",
-    phrase: "Desde las flores hasta los ecosistemas: entender cómo se organizan los sistemas vivos.",
+    name: "Plantas, jardines y espacios vivos",
+    phrase: "Cultivo y observación de vida vegetal.",
     color: "var(--rosa)",
     icon: (
       <>
@@ -55,19 +42,8 @@ const CAMPO = [
     ),
   },
   {
-    name: "Tecnología",
-    phrase: "Herramientas que ayudan a comprender, automatizar y construir.",
-    color: "var(--morado)",
-    icon: (
-      <>
-        <rect x="3" y="4" width="18" height="16" rx="2" />
-        <path d="M3 9h18M9 21V9" />
-      </>
-    ),
-  },
-  {
     name: "Accesibilidad e inclusión",
-    phrase: "Crear proyectos que consideren a más personas y reduzcan barreras.",
+    phrase: "Enseñanza sin barreras: cursos y conferencias que lleguen a más gente.",
     color: "var(--verde)",
     icon: (
       <>
@@ -77,16 +53,16 @@ const CAMPO = [
     ),
   },
   {
-    name: "Educación",
-    phrase: "Aprender constantemente y compartir aquello que vale la pena.",
-    color: "var(--azul)",
-    icon: <path d="M2 8l10-4 10 4-10 4-10-4Zm5 2.4V16c0 1.1 2.2 3 5 3s5-1.9 5-3v-5.6" />,
-  },
-  {
-    name: "Pequeños negocios",
-    phrase: "La belleza de construir algo útil, sostenible y bien hecho.",
-    color: "var(--rosa)",
-    icon: <path d="M3 9h18v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9Zm2 0 1-4h12l1 4M9 13v3M15 13v3" />,
+    name: "Arte y craft",
+    phrase: "Exploración sensorial a través de flores secas, pintura y resina.",
+    color: "var(--morado)",
+    icon: (
+      <>
+        <path d="M3 3h18v18H3z" />
+        <circle cx="8" cy="8" r="2" />
+        <path d="M3 15l6-6 5 5 7-7" />
+      </>
+    ),
   },
 ];
 
