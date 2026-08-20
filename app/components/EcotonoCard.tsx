@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 
 const DESTINATIONS = [
-  { name: 'Amalfi', image: '/destinos/amalfi.jpg' },
-  { name: 'Cartagena', image: '/destinos/cartagena.jpg' },
-  { name: 'Costa Rica', image: '/destinos/costa-rica.jpg' },
-  { name: 'Los Cabos', image: '/destinos/los-cabos.jpg' },
-  { name: 'Oaxaca', image: '/destinos/oaxaca.jpg' },
-  { name: 'Puerto Vallarta', image: '/destinos/puerto-vallarta.jpg' },
-  { name: 'Santorini', image: '/destinos/santorini.jpg' },
-  { name: 'Tulum', image: '/destinos/tulum.jpg' },
+  { name: 'Amalfi', image: '/destinos/amalfi.jpg', fontFamily: 'Georgia, serif', fontWeight: 400, fontStyle: 'italic', fontSize: '18px' },
+  { name: 'Cartagena', image: '/destinos/cartagena.jpg', fontFamily: 'Fraunces, serif', fontWeight: 700, fontStyle: 'normal', fontSize: '20px' },
+  { name: 'Costa Rica', image: '/destinos/costa-rica.jpg', fontFamily: 'Inter, sans-serif', fontWeight: 300, fontStyle: 'normal', fontSize: '16px', letterSpacing: '1px' },
+  { name: 'Los Cabos', image: '/destinos/los-cabos.jpg', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontStyle: 'normal', fontSize: '19px', letterSpacing: '0.5px' },
+  { name: 'Oaxaca', image: '/destinos/oaxaca.jpg', fontFamily: 'Georgia, serif', fontWeight: 700, fontStyle: 'normal', fontSize: '17px' },
+  { name: 'Puerto Vallarta', image: '/destinos/puerto-vallarta.jpg', fontFamily: 'Fraunces, serif', fontWeight: 500, fontStyle: 'italic', fontSize: '19px' },
+  { name: 'Santorini', image: '/destinos/santorini.jpg', fontFamily: 'Inter, sans-serif', fontWeight: 400, fontStyle: 'normal', fontSize: '18px', letterSpacing: '2px' },
+  { name: 'Tulum', image: '/destinos/tulum.jpg', fontFamily: 'Fraunces, serif', fontWeight: 500, fontStyle: 'italic', fontSize: '18px' },
 ];
 
 export function EcotonoCard() {
@@ -72,17 +72,21 @@ export function EcotonoCard() {
 
         {/* Carousel Circle */}
         <div className="flex items-end justify-between gap-4">
-          <div className="flex gap-1">
-            {DESTINATIONS.map((_, idx) => (
-              <div
-                key={idx}
-                className="h-1 w-6 rounded-full transition-all duration-300"
-                style={{
-                  background: idx === currentIndex ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.3)',
-                }}
-                aria-hidden="true"
-              />
-            ))}
+          {/* Current destination with unique typography */}
+          <div>
+            <span
+              className="transition-all duration-700 inline-block"
+              style={{
+                fontFamily: current.fontFamily,
+                fontWeight: current.fontWeight,
+                fontStyle: current.fontStyle,
+                fontSize: current.fontSize,
+                letterSpacing: current.letterSpacing || '0',
+                color: 'rgba(255, 255, 255, 0.9)',
+              }}
+            >
+              {current.name}
+            </span>
           </div>
 
           {/* Circular image preview */}
