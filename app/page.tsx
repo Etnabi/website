@@ -172,8 +172,16 @@ export default function Home() {
         </section>
 
         <section className="contact reveal relative" id="contacto">
-          <OrganicBlob className="absolute top-16 -right-20 w-48 h-48" color="var(--rosa)" />
-          <OrganicBlob className="absolute bottom-32 -left-16 w-36 h-36" color="var(--acento)" />
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" viewBox="0 0 1200 600" preserveAspectRatio="none">
+            <g opacity="0.15">
+              <path d="M 100 80 Q 80 120, 120 150 Q 140 160, 130 190" stroke="#42625F" strokeWidth="2" fill="none" strokeLinecap="round"/>
+              <circle cx="95" cy="75" r="3" fill="#42625F"/>
+              <circle cx="142" cy="195" r="2" fill="#42625F"/>
+              <path d="M 1100 120 L 1130 150 Q 1140 165, 1120 180" stroke="#42625F" strokeWidth="2" fill="none" strokeLinecap="round"/>
+              <ellipse cx="1050" cy="500" rx="80" ry="60" fill="#42625F" opacity="0.08"/>
+              <ellipse cx="150" cy="520" rx="60" ry="50" fill="#42625F" opacity="0.06"/>
+            </g>
+          </svg>
           <div className="contact-inner relative z-10">
             <span className="eyebrow">Contacto</span>
             <h2 className="section-title">Hablemos.</h2>
