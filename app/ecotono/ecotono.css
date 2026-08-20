@@ -64,10 +64,24 @@
 .hero{
   position:relative; min-height:100vh; display:flex; align-items:center;
   padding:120px clamp(20px,6vw,80px) 80px; overflow:hidden;
+  background-image: url('/destinos/santorini.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.hero::before{
+  content:'Santorini'; position:absolute; right:clamp(20px,6vw,80px); top:50%; transform:translateY(-50%);
+  font-family:Georgia,"Iowan Old Style",serif; font-size:clamp(60px,10vw,160px); font-weight:400;
+  letter-spacing:-.02em; color:rgba(243,234,217,.15); line-height:1; pointer-events:none; z-index:0;
+  white-space:nowrap; text-wrap:nowrap;
+}
+.hero::after{
+  content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(32,26,20,0.5) 0%, rgba(32,26,20,0.3) 100%);
+  pointer-events:none; z-index:0;
 }
 .hero-mark{
   position:absolute; right:-8%; top:50%; transform:translateY(-50%);
-  width:min(58vw,760px); color:var(--clay-deep); opacity:.09; pointer-events:none; z-index:0;
+  width:min(58vw,760px); color:var(--clay-deep); opacity:.09; pointer-events:none; z-index:1;
 }
 .hero-mark .dot{ fill:var(--rosa); opacity:.6; }
 
