@@ -4,6 +4,7 @@ import RevealObserver from "./RevealObserver";
 import ZoomImage from "./ZoomImage";
 import ProteinChain from "./ProteinChain";
 import BackgroundMolecules from "./BackgroundMolecules";
+import { EcotonoCard } from "./components/EcotonoCard";
 import "./home.css";
 
 const NEGOCIOS = [
@@ -11,7 +12,7 @@ const NEGOCIOS = [
     href: "https://ecotono.etnabi.com",
     name: "Ecotono Travel Co.",
     blurb:
-      "No es solo una agencia de viajes. Es un ejercicio de diseño de experiencias con la misma atención al detalle que requiere una investigación.",
+      "No es solo un viaje, es donde se encuentran los mundos.",
     swatch: "var(--rosa-ecotono)",
   },
 ];
@@ -175,13 +176,17 @@ export default function Home() {
           <MoleculeCluster className="deco deco-negocios" stroke="var(--rosa-ecotono)" />
           <h2 className="relative z-10">Lo que estoy construyendo</h2>
           <div className="negocios-grid relative z-10">
-            {NEGOCIOS.map((n) => (
-              <a className="negocio-card" href={n.href} key={n.name}>
-                <span className="swatch" style={{ background: n.swatch }}></span>
-                <h3>{n.name}</h3>
-                <p>{n.blurb}</p>
-              </a>
-            ))}
+            {NEGOCIOS.map((n) =>
+              n.name === "Ecotono Travel Co." ? (
+                <EcotonoCard key={n.name} />
+              ) : (
+                <a className="negocio-card" href={n.href} key={n.name}>
+                  <span className="swatch" style={{ background: n.swatch }}></span>
+                  <h3>{n.name}</h3>
+                  <p>{n.blurb}</p>
+                </a>
+              )
+            )}
             <div className="negocio-card ghost">
               <h3>Próximamente</h3>
               <p>El siguiente proyecto va aquí, cuando esté listo.</p>
