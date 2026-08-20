@@ -99,13 +99,13 @@ export default function ProteinChain() {
     }
 
     function resize() {
-      const rect = canvas.getBoundingClientRect();
+      const rect = canvas!.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = rect.width;
       H = rect.height;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas!.width = W * dpr;
+      canvas!.height = H * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function initChains() {
@@ -206,7 +206,7 @@ export default function ProteinChain() {
     }
 
     function frame(t: number) {
-      ctx.clearRect(0, 0, W, H);
+      ctx!.clearRect(0, 0, W, H);
       const time = t * 0.0009;
 
       chains.forEach(chain => drawChain(chain, time));
