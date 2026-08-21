@@ -33,6 +33,11 @@
   font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
   color:var(--bronce); display:inline-flex; align-items:center; gap:10px;
 }
+.hero .eyebrow{
+  background-color: rgba(245,232,209,.80);
+  padding: 8px 12px;
+  border-radius: 2px;
+}
 .eyebrow .rule{ width:22px; height:1px; background:var(--bronce); display:inline-block; }
 
 .mark{ display:inline-block; }
@@ -64,20 +69,22 @@
 .hero{
   position:relative; min-height:100vh; display:flex; align-items:center;
   padding:120px clamp(20px,6vw,80px) 80px; overflow:hidden;
-  background-image: url('/destinos/santorini.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-size: cover; background-position: center; background-attachment: fixed;
+  transition: background-image .8s ease-out;
 }
-.hero::before{
-  content:'Santorini'; position:absolute; right:clamp(20px,6vw,80px); top:50%; transform:translateY(-50%);
-  font-family:Georgia,"Iowan Old Style",serif; font-size:clamp(60px,10vw,160px); font-weight:400;
-  letter-spacing:-.02em; color:rgba(243,234,217,.15); line-height:1; pointer-events:none; z-index:0;
-  white-space:nowrap; text-wrap:nowrap;
+.hero-overlay{
+  position:absolute; inset:0; background:linear-gradient(135deg, rgba(32,26,20,.65) 0%, rgba(32,26,20,.45) 100%);
+  z-index:0; pointer-events:none;
 }
-.hero::after{
-  content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(32,26,20,0.5) 0%, rgba(32,26,20,0.3) 100%);
-  pointer-events:none; z-index:0;
+.hero-destination-name{
+  position:absolute; top:20%; right:clamp(20px,6vw,80px); transform:translateY(-50%);
+  font-family:Georgia,serif; font-size:clamp(60px,10vw,160px); font-weight:700;
+  color:rgba(243,234,217,.25); z-index:1; pointer-events:none; text-wrap:balance;
+  line-height:1; letter-spacing:-.02em;
+  text-decoration: underline;
+  text-decoration-color: rgba(243,234,217,.35);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 2px;
 }
 .hero-mark{
   position:absolute; right:-8%; top:50%; transform:translateY(-50%);
@@ -92,23 +99,39 @@
 .hero h1{
   font-family:Georgia,"Iowan Old Style",serif; font-weight:400; font-size:clamp(38px,5.6vw,64px);
   line-height:1.05; letter-spacing:-.01em; margin:24px 0 22px; text-wrap:balance; color:var(--ink);
+  background-color: rgba(245,232,209,.80);
+  padding: 3px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .hero h1 em{ font-style:italic; color:var(--clay-deep); }
-.hero p.lede{ font-size:clamp(16px,1.7vw,18.5px); color:var(--ink-soft); max-width:44ch; margin:0 0 38px; }
+.hero p.lede{
+  font-size:clamp(16px,1.7vw,18.5px); color:var(--ink-soft); max-width:44ch; margin:0 0 38px;
+  background-color: rgba(245,232,209,.80);
+  padding: 3px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 .hero-ctas{ display:flex; gap:18px; flex-wrap:wrap; align-items:center; }
 .ecotono-page .btn-primary{
-  display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:var(--arena);
-  padding:16px 30px; border-radius:1px; text-decoration:none; font-weight:600; font-size:14px;
+  display:inline-flex; align-items:center; gap:10px; background:#8C6A45; color:#fff;
+  padding:16px 30px; border-radius:8px; text-decoration:none; font-weight:600; font-size:14px;
   letter-spacing:.03em; transition:background .25s ease, transform .25s ease, box-shadow .25s ease;
-  box-shadow:0 14px 30px -12px rgba(32,26,20,.45);
+  box-shadow:0 14px 30px -12px rgba(140,106,69,.45);
 }
 .ecotono-page .btn-primary svg{ fill:currentColor; }
-.ecotono-page .btn-primary:hover{ background:var(--clay-deep); transform:translateY(-2px); box-shadow:0 18px 34px -10px rgba(110,117,72,.5); }
+.ecotono-page .btn-primary:hover{ background:#6B5837; transform:translateY(-2px); box-shadow:0 18px 34px -10px rgba(140,106,69,.5); }
 .ecotono-page .btn-ghost{
   display:inline-flex; align-items:center; gap:8px; color:var(--ink); text-decoration:none;
   font-size:13.5px; border-bottom:1px solid var(--line); padding-bottom:3px; transition:border-color .2s ease, color .2s ease;
 }
 .ecotono-page .btn-ghost:hover{ border-color:var(--clay-deep); color:var(--clay-deep); }
+.hero-ctas .btn-ghost{
+  background:#6E7548; color:#fff; padding:12px 24px; border:none; border-radius:8px;
+  font-size:14px; font-weight:600; transition:background .25s ease, transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 8px 20px -8px rgba(110,117,72,.4);
+}
+.hero-ctas .btn-ghost:hover{ background:#57603A; transform:translateY(-2px); box-shadow:0 12px 26px -8px rgba(110,117,72,.5); border:none; color:#fff; }
 
 .founder{
   background:radial-gradient(ellipse 65% 90% at 20% 0%, #2C2118, var(--ink) 60%), var(--ink);

@@ -1,5 +1,17 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import RevealObserver from "./RevealObserver";
+
+const HERO_DESTINATIONS = [
+  { name: "Santorini", image: "/destinos/santorini.jpg" },
+  { name: "Amalfi", image: "/destinos/amalfi.jpg" },
+  { name: "Tulum", image: "/destinos/tulum.jpg" },
+  { name: "Oaxaca", image: "/destinos/oaxaca.jpg" },
+  { name: "Los Cabos", image: "/destinos/los-cabos.jpg" },
+  { name: "Costa Rica", image: "/destinos/costa-rica.jpg" },
+] as const;
 
 const DESTINATIONS = [
   {
@@ -64,6 +76,61 @@ function WhatsAppIcon() {
   );
 }
 
+function HeroCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % HERO_DESTINATIONS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const current = HERO_DESTINATIONS[currentIndex];
+
+  return (
+    <header
+      className="hero"
+      style={{
+        backgroundImage: `url('${current.image}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <div className="hero-overlay"></div>
+      <svg className="hero-mark" viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="1" />
+        <path className="tide-wave w2" d="M14 76c32-27 59 27 86 0s50-27 86 0" stroke="currentColor" strokeWidth="1" />
+        <path className="tide-wave w1" d="M14 124c32-27 59 27 86 0s50-27 86 0" stroke="currentColor" strokeWidth="1" />
+        <circle className="dot tide-dot" cx="100" cy="100" r="4.5" />
+      </svg>
+      <div className="hero-destination-name">{current.name}</div>
+      <div className="hero-inner">
+        <span className="eyebrow">
+          <span className="rule"></span>Asesoría de viajes curada, con precisión de campo
+        </span>
+        <h1>
+          Donde los mundos<br />
+          <em>se encuentran.</em>
+        </h1>
+        <p className="lede">
+          Diseñamos cada viaje en el punto exacto donde lo conocido se encuentra con lo inesperado.
+        </p>
+        <div className="hero-ctas">
+          <a className="btn-primary" href={WHATSAPP_HREF} target="_blank" rel="noopener">
+            <WhatsAppIcon />
+            Cuéntame tu viaje
+          </a>
+          <a className="btn-ghost" href="#destinos">
+            Ver puntos de partida ↓
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 export default function EcotonoPage() {
   return (
     <div className="ecotono-page">
@@ -102,84 +169,9 @@ export default function EcotonoPage() {
         </a>
       </nav>
 
-      <header className="hero">
-        <svg className="hero-mark" viewBox="0 0 200 200" fill="none">
-          <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="1" />
-          <path className="tide-wave w2" d="M14 76c32-27 59 27 86 0s50-27 86 0" stroke="currentColor" strokeWidth="1" />
-          <path className="tide-wave w1" d="M14 124c32-27 59 27 86 0s50-27 86 0" stroke="currentColor" strokeWidth="1" />
-          <circle className="dot tide-dot" cx="100" cy="100" r="4.5" />
-        </svg>
-        <div className="hero-inner">
-          <span className="eyebrow">
-            <span className="rule"></span>Asesoría de viajes curada, con precisión de campo
-          </span>
-          <h1>
-            Donde los mundos<br />
-            <em>se encuentran.</em>
-          </h1>
-          <p className="lede">
-            Diseñamos cada viaje en el punto exacto donde lo conocido se encuentra con lo inesperado.
-          </p>
-          <div className="hero-ctas">
-            <a className="btn-primary" href={WHATSAPP_HREF} target="_blank" rel="noopener">
-              <WhatsAppIcon />
-              Cuéntame tu viaje
-            </a>
-            <a className="btn-ghost" href="#destinos">
-              Ver puntos de partida ↓
-            </a>
-          </div>
-        </div>
-      </header>
+      <HeroCarousel />
 
-      <section className="founder reveal">
-        <div className="founder-inner">
-          <span className="eyebrow">
-            <span className="rule"></span>Nuestro método
-          </span>
-          <blockquote>
-            &quot;Observamos antes de proponer. Cada itinerario pasa por el mismo rigor con el que se estudia un
-            ecosistema — nada al azar, todo con un porqué.&quot;
-          </blockquote>
-          <cite>— Método Ecotono</cite>
-        </div>
-      </section>
-
-      <section className="pad valores reveal" id="valores">
-        <div className="section-head">
-          <span className="eyebrow">
-            <span className="rule"></span>Cómo trabajamos
-          </span>
-          <h2>Precisión de campo, aplicada a tu itinerario.</h2>
-        </div>
-        <div className="valores-grid">
-          <div className="valor">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#8C6A45" strokeWidth="1.3">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M8 12l2.5 2.5L16 9" />
-            </svg>
-            <h3>Observación, no catálogo</h3>
-            <p>Cada itinerario nace de entender lo que realmente buscas — no de un filtro de precios genérico.</p>
-          </div>
-          <div className="valor">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#8C6A45" strokeWidth="1.3">
-              <rect x="3" y="4" width="18" height="16" rx="1" />
-              <path d="M3 9h18M8 4v5" />
-            </svg>
-            <h3>Rigor, con apoyo de IA</h3>
-            <p>La tecnología acelera la investigación y el seguimiento — la decisión final siempre pasa por un criterio humano.</p>
-          </div>
-          <div className="valor">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#8C6A45" strokeWidth="1.3">
-              <path d="M4 4l16 8-16 8 4-8-4-8z" />
-            </svg>
-            <h3>Una sola conversación</h3>
-            <p>Todo el proceso vive en un mismo hilo de WhatsApp, de principio a fin, sin perder contexto.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="pad reveal" id="destinos">
+<section className="pad reveal" id="destinos">
         <div className="section-head">
           <span className="eyebrow">
             <span className="rule"></span>Puntos de partida
@@ -207,44 +199,7 @@ export default function EcotonoPage() {
         </div>
       </section>
 
-      <section className="pad proceso reveal" id="proceso">
-        <div className="section-head">
-          <span className="eyebrow">
-            <span className="rule"></span>Cómo empezamos
-          </span>
-          <h2>Tres pasos, un solo mensaje para arrancar.</h2>
-        </div>
-        <div className="pasos">
-          <div className="paso">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-              <path d="M4 5h16v11H9l-4 4V5z" />
-            </svg>
-            <span className="n">PASO I</span>
-            <h4>Me cuentas el viaje</h4>
-            <p>Fechas, presupuesto aproximado, con quién viajas — por WhatsApp, sin formularios largos.</p>
-          </div>
-          <div className="paso">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-              <path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z" />
-              <circle cx="12" cy="9" r="2.4" />
-            </svg>
-            <span className="n">PASO II</span>
-            <h4>Trazamos la ruta</h4>
-            <p>Te regreso opciones curadas y un primer itinerario. Ajustamos juntos hasta que quede exacto.</p>
-          </div>
-          <div className="paso">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-              <rect x="4" y="8" width="16" height="12" rx="1.5" />
-              <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-            </svg>
-            <span className="n">PASO III</span>
-            <h4>Viajas tranquilo</h4>
-            <p>Confirmación, seguimiento y un contacto directo antes, durante y después del viaje.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="pad contacto reveal" id="contacto">
+<section className="pad contacto reveal" id="contacto">
         <svg className="paper-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
           <path d="M21 3 3 10.5l7.5 2.5L13 21 21 3z" />
           <path d="M10.5 13 21 3" />
@@ -254,8 +209,7 @@ export default function EcotonoPage() {
         </span>
         <h2>¿Hacia dónde te gustaría ir?</h2>
         <p className="lede">
-          Escríbeme directo por WhatsApp — sin compromiso, sin catálogo cerrado. Solo una conversación para entender
-          qué viaje tienes en mente.
+          Escríbeme directo por WhatsApp — sin compromiso, sin catálogo cerrado.
         </p>
         <a className="btn-primary" href={WHATSAPP_HREF} target="_blank" rel="noopener">
           <WhatsAppIcon />
